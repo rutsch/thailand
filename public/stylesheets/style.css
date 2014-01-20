@@ -1,0 +1,132 @@
+body {
+	padding: 0px;
+	margin: 0px;
+	font-size: 14px;
+	font-family: 'Julius Sans One', sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.skrollable {
+        /*
+         * First-level skrollables are positioned relative to window
+         */
+        position:fixed;
+
+        /*
+         * Skrollables by default have a z-index of 100 in order to make it easy to position elements in front/back without changing each skrollable
+         */
+        z-index:100;
+}
+
+.skrollr-mobile .skrollable {
+        /*
+                May cause issues on Android default browser (see #331 on GitHub).
+        */
+        position:absolute;
+}
+
+.skrollable .skrollable {
+        /*
+         * Second-level skrollables are positioned relative their parent skrollable
+         */
+        position:absolute;
+}
+
+.skrollable .skrollable .skrollable {
+        /*
+         * Third-level (and below) skrollables are positioned static
+         */
+        position:static;
+}
+div.anchor_wrapper{
+	transition: width 1s;
+	-webkit-transition: width 1s;	
+	z-index: 10000000000;
+	height: 100%;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 25px;
+	background: rgba(0,0,0,0.7);
+	
+}
+div.anchor_wrapper:hover{
+	width: 75px;	
+}	
+div.anchor_wrapper div{
+	height: 5%;
+	width: 75px;
+	margin-bottom: -15px;
+	padding-top: 15px;	
+	text-align: center;
+	display: block;
+	color: orange;
+	font-size: 20px;
+	font-weight: bold;
+	float: right;
+}
+div.anchor_wrapper div.empty, div.anchor_wrapper div.empty:hover{
+	color: #000;	
+	cursor: default;
+}
+div.anchor_wrapper div:hover{
+	color: #fff;
+	cursor: pointer;
+}
+div.intro{
+	background-image: url('/images/maya_bay_thailand-wallpaper.jpg');
+	background-repeat: no-repeat; 
+	background-position: bottom center;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	position: fixed;	
+}
+h1{
+	color: #fff;
+	font-size: 100px;
+	padding-left: 200px;
+	text-shadow: 2px 2px rgba(100,100,100,0.2);
+}
+div.daywrapper{
+	width: 100%;
+	height: 100%;
+	position: fixed;		
+}
+div.dayintro{
+	width: 100%;
+	height: 100%;
+	position: fixed;	
+}
+div.dayintro h2{
+	display: block;
+	top: 50%;
+	left: 50%;
+	font-size: 150px;
+	color: orange;
+	text-shadow: 2px 2px rgba(100,100,100,0.2);
+	text-align: center;
+	margin-left: -250px;
+	margin-top: -75px;
+	position: absolute;
+	width: 500px;
+}
+#countdown{
+	position: absolute;
+	left: 200px;
+	top: 200px;
+	font-size: 40px;
+	color: orange;
+	text-shadow: 2px 2px rgba(100,100,100,0.2);
+	font-weight: bold;
+}
+div.image{
+	background-repeat: no-repeat; 
+	background-position: bottom center;
+	background-size: cover;	
+	width: 100%;
+	height: 100%;
+}

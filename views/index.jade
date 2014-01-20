@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  div.anchor_wrapper
+    - for (var i=0;i<data.length;i++)
+      - var hasItems = data[i].images.length > 0
+      div(id='anchor_'+data[i].foldername, class=(hasItems==true?'':'empty'), onclick=(hasItems==true?'goToDate("'+data[i].foldername+'")':''))=data[i].foldername
+  div(class='intro', data-0='top: 0%;', data-1000='top: -100%;')
+    h1 Thailand 2014
+    div(id='countdown')
+  - var pos = 0;
+  - for (var i=0;i<data.length;i++)
+    - var first = true;
+    - var objWrapper={};
+    - objWrapper['data-'+ pos] = 'top: 100%;';
+    - objWrapper['data-'+ (pos+1000)] = 'top: 0%;';
+    - objWrapper['data-'+ ((pos+(1000 * (data[i].images.length + 2)))-1000)] = 'top: 0%;';
+    - objWrapper['data-'+ (pos+(1000 * (data[i].images.length + 2)))] = 'top: -100%;';
+    - if(data[i].images.length > 0){
+      +daywrapper(objWrapper, data[i])
+    - }
+        
+mixin daywrapper(attr, data)
+  div(class='daywrapper')&attributes(attr)
+    - var objIntro={};
+    - objIntro['data-pos']=pos+1000;    
+    - objIntro['data-'+ pos] = 'right: 0%;';
+    - objIntro['data-'+ (pos +200)] = 'right: 0%;';
+    - objIntro['data-'+ (pos +1000)] = 'right: 0%;';
+    - objIntro['data-'+ (pos +1200)] = 'right: 0%;';
+    - pos = pos + 1000;
+    +dayintro(objIntro, data.foldername)
+    - for (var ii=0;ii<data.images.length;ii++)   
+      - var obj={};
+      - obj['data-'+ pos] = 'right: -100%;';
+      - obj['data-'+ (pos +200)] = 'right: 0%;';
+      - obj['data-'+ (pos +1000)] = 'right: 0%;';
+      - obj['data-'+ (pos +1200)] = 'right: 100%;';
+      - obj.style = "background-image: url('"+data.images[ii]+"');";
+      - if(ii == data.images.length -1) obj['data-'+ (pos +1200)] = 'right: 0%;';
+      +div(obj)
+      - first = false;
+      - pos = pos + 1000;    
+
+mixin dayintro(attr, name)
+  div(class='dayintro', id=name)&attributes(attr)
+    h2=name
+
+mixin div(attr)
+  div(class='image')&attributes(attr)
+  
