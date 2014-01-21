@@ -45,8 +45,24 @@ function getFiles(dir){
         if (fs.statSync(name).isDirectory()){
             //getFiles(name);
         }else{
-            output.push(name.replace('./public', ''))
+        	var img={};
+        	img.src = name.replace('./public', '');
+        	img.text = getText('./public/texts/'+files[i].replace('.jpg', '.txt'));
+            output.push(img);
         }
     }
     return output;
+}
+function getText(file){
+	console.log(file);
+	var text=null;
+	try{
+		text = fs.readFileSync(file);
+		return text;
+	}
+	catch(err){
+		return '';
+	}
+	
+	console.log(text);
 }

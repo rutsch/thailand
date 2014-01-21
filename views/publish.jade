@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  form(method='post', action='/admin/publish', enctype='multipart/form-data')
+    img(src=file, width='500')
+    input(type='hidden', name='filename', value=file)
+    textarea(name='image_desc')
+    select(name='targetfolder')
+      - for (var i=0;i<folders.length;i++)
+        option(value=folders[i])=folders[i].replace('./public/images/', '')
+    input(type='submit')
+  

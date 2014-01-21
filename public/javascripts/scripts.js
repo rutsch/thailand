@@ -1,7 +1,8 @@
 var s = skrollr.init({
     smoothScrolling : true,
-	smoothScrollingDuration: 500,
-	edgeStrategy: 'set'
+	smoothScrollingDuration: 600,
+	edgeStrategy: 'set',
+	scale: 0.5
 });
 
 //set the date we're counting down to

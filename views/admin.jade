@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  div(class='admin')
+    div(class='header')
+      a(href='/admin/upload') upload new image
+    ul
+      - for(var i=0;i<files.length;i++)
+        li
+          a(href='/admin/publish/'+files[i].name)
+            img(src=files[i].src)

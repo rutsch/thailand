@@ -5,7 +5,7 @@ block content
     - for (var i=0;i<data.length;i++)
       - var hasItems = data[i].images.length > 0
       div(id='anchor_'+data[i].foldername, class=(hasItems==true?'':'empty'), onclick=(hasItems==true?'goToDate("'+data[i].foldername+'")':''))=data[i].foldername
-  div(class='intro', data-0='top: 0%;', data-1000='top: -100%;')
+  div(class='intro', data-0='top: 0%;', data-500='top: -100%;')
     h1 Thailand 2014
     div(id='countdown')
   - var pos = 0;
@@ -13,12 +13,19 @@ block content
     - var first = true;
     - var objWrapper={};
     - objWrapper['data-'+ pos] = 'top: 100%;';
-    - objWrapper['data-'+ (pos+1000)] = 'top: 0%;';
-    - objWrapper['data-'+ ((pos+(1000 * (data[i].images.length + 2)))-1000)] = 'top: 0%;';
+    - objWrapper['data-'+ (pos+500)] = 'top: 0%;';
+    - objWrapper['data-'+ ((pos+(1000 * (data[i].images.length + 2)))-500)] = 'top: 0%;';
     - objWrapper['data-'+ (pos+(1000 * (data[i].images.length + 2)))] = 'top: -100%;';
+    - if(i==data.length-1) objWrapper['data-'+ (pos+(1000 * (data[i].images.length + 2)))] = 'top: -50%;';
     - if(data[i].images.length > 0){
       +daywrapper(objWrapper, data[i])
+      - pos = pos + 500; 
     - }
+  - var objEnd={}
+  - objEnd['data-'+ pos] = 'top: 100%;'; 
+  - objEnd['data-'+ (pos+500)] = 'top: 50%;'; 
+  +enddiv(objEnd)
+
         
 mixin daywrapper(attr, data)
   div(class='daywrapper')&attributes(attr)
@@ -27,18 +34,19 @@ mixin daywrapper(attr, data)
     - objIntro['data-'+ pos] = 'right: 0%;';
     - objIntro['data-'+ (pos +200)] = 'right: 0%;';
     - objIntro['data-'+ (pos +1000)] = 'right: 0%;';
-    - objIntro['data-'+ (pos +1200)] = 'right: 0%;';
+    - objIntro['data-'+ (pos +1200)] = 'right: 100%;';
     - pos = pos + 1000;
     +dayintro(objIntro, data.foldername)
     - for (var ii=0;ii<data.images.length;ii++)   
       - var obj={};
-      - obj['data-'+ pos] = 'right: -100%;';
-      - obj['data-'+ (pos +200)] = 'right: 0%;';
+      - obj['data-'+ pos] = 'right: -100%;opacity:0;';
+      - obj['data-'+ (pos +200)] = 'right: 0%;opacity:1;';
+      - obj['data-'+ (pos +400)] = 'right: 0%;';
       - obj['data-'+ (pos +1000)] = 'right: 0%;';
       - obj['data-'+ (pos +1200)] = 'right: 100%;';
-      - obj.style = "background-image: url('"+data.images[ii]+"');";
+      - obj.style = "background-image: url('"+data.images[ii].src+"');";
       - if(ii == data.images.length -1) obj['data-'+ (pos +1200)] = 'right: 0%;';
-      +div(obj)
+      +imagediv(obj, data.images[ii].text, pos)
       - first = false;
       - pos = pos + 1000;    
 
@@ -46,6 +54,19 @@ mixin dayintro(attr, name)
   div(class='dayintro', id=name)&attributes(attr)
     h2=name
 
-mixin div(attr)
+mixin imagediv(attr, text, pos)
   div(class='image')&attributes(attr)
-  
+    - if(text != ''){
+      - var obj = {};
+      - obj['data-'+ (pos +500)] = 'opacity:0;';
+      - obj['data-'+ (pos +700)] = 'opacity:1;';
+      +imagedesc(obj, text)
+    - }
+
+mixin imagedesc(attr, text)
+  div(class='description')&attributes(attr)
+    p=text
+    
+mixin enddiv(attr)
+  div(class='end')&attributes(attr)
+    p The end... Thanks for visiting!
