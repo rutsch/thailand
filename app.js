@@ -30,6 +30,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+//app.all('/admin/*', )
 app.get('/admin', admin.index);
 app.get('/admin/upload', admin.uploadform);
 app.post('/admin/upload', admin.uploadimage);

@@ -52,7 +52,7 @@ exports.showimage = function(req, res){
 exports.publishimage = function(req, res){
 	console.log(req.body);
 	var filepath = './public' + req.body.filename;
-	var filename = req.body.filename.replace('/uploads', '')
+	var filename = req.body.filename.replace('/uploads', '').toLowerCase();
 	var description = req.body.image_desc;
 	var targetFolder = req.body.targetfolder;
 	fs.writeFile('./public/texts'+filename.replace('.jpg', '.txt'), description, function(){
